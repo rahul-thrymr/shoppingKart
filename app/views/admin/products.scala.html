@@ -1,0 +1,51 @@
+@adminHeader("Adding Products")
+<center><div><h3><font color="green">@flash.get("success")</font></h3></div></center>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <h2 class="text-center login-title">Adding Products</h2>
+            <hr />
+            <div class="account-wall">
+              <form action="@routes.AdminController.addProduct()" method="POST" enctype="multipart/form-data">
+              
+	              	Category List:&nbsp;&nbsp;<select class="selectpicker" name="category">
+	              		<option value="0">Select</option>
+				        @for(cat<-models.Category.find.all()){
+				          <option value="@cat.id">@cat.categoryName</option>
+				         }         				         
+	     			</select>
+     				<br><br>
+                <input type="text" class="form-control" placeholder="Brand Name" name="brand" required autofocus><br>
+                
+                <input type="text" class="form-control" placeholder="Color" name="color" required ><br>
+                
+                <input type="number" class="form-control" placeholder="Price" name="price" required ><br>
+                
+                <input type="text" class="form-control" placeholder="Waranty" name="waranty" required ><br>                          
+                
+                <input type="text" class="form-control" placeholder="Description" name="description" required><br>
+                
+                <div class="row">
+            	<div class="col-md-2 text-center">
+                	
+                	<div class="form-group">
+	                	<div class="col-md-2">
+	                		<label for="inputFile" class="control-label btn btn-raised"><b>Upload Image</b></label>
+						</div><br>
+				
+	               		 <div class="col-md-4">
+	                 		 <input type="file" name="image" id="inputFile"  class="upload">
+	                 		 <br>
+	                	</div>
+             		</div>
+            	    <!-- <a class="btn btn-link btn-info">Upload Image</a> -->
+            	</div>
+            	</div>	
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Add Product</button>
+                
+               
+               </form>
+            </div>
+        </div>
+    </div>
+</div>

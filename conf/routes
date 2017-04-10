@@ -1,0 +1,89 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET    /                        controllers.FirstController.callHeader()
+
+# An example controller showing how to use dependency injection
+GET    /count                   controllers.CountController.count
+# An example controller showing how to write asynchronous code
+GET    /message                 controllers.AsyncController.message
+
+# Map static resources from the /public folder to the /assets URL path
+GET    /assets/*file            controllers.Assets.versioned(path="/public", file: Asset)
+
+#=================================================Customer Module==================================================
+
+GET    /register                controllers.FirstController.callRegister()
+
+GET    /login                   controllers.FirstController.callLogin()
+
+GET		/getEmail/:email		controllers.RetrieveController.getEmail(email:String)	
+
+POST   /store                   controllers.CustomerController.store()				
+
+POST    /checkLogin              controllers.CustomerController.login()	
+
+GET    /logout                  controllers.CustomerController.logout()	
+
+GET    /getImage/:id            controllers.RetrieveController.getImage(id: Long)
+
+GET    /viewProducts            controllers.RetrieveController.viewProductCust()
+
+GET    /viewCartDetails		   	controllers.RetrieveController.viewCartDetails()
+
+GET		/viewCart				controllers.RetrieveController.viewCart()
+
+GET		/cartHistory			controllers.RetrieveController.cartHistory()
+
+GET    /isLogin   	            controllers.CustomerController.isLoggedInUser()
+
+GET    /editProfile			    controllers.FirstController.editProfile()
+
+POST    /updateProfile		    controllers.CustomerController.updateProfile()
+
+GET		/refer					controllers.AdminController.refer()
+
+#=================================================Admin Module==================================================
+
+GET    /a                       controllers.FirstController.callAdmin()
+
+POST    /checkadmin             controllers.AdminController.login()
+
+GET    /adminLogout		   		controllers.AdminController.logout()
+
+GET    /adminHomepage           controllers.FirstController.callAdminHomePage()
+
+GET    /callCategory            controllers.FirstController.callCategory()
+
+POST   /addCategory             controllers.AdminController.addCategory()
+
+GET    /callProducts            controllers.FirstController.callProducts()
+
+POST   /addProducts             controllers.AdminController.addProduct()
+
+GET    /viewProductsAdmin/:id   controllers.RetrieveController.viewProductsToAdmin(id: Long)
+
+GET    /allProductDetails		controllers.RetrieveController.allProductDetails()
+
+GET    /getProductId/:id        controllers.RetrieveController.getProductId(id: Long)
+
+POST   /updateProducts/:id      controllers.AdminController.updateProducts(id: Long)
+
+GET   	/deleteProducts/:id     controllers.AdminController.deleteProducts(id: Long)
+
+GET		/addToCart/:id			controllers.AdminController.addToCart(id: Long)
+
+GET		/removecart/:id			controllers.AdminController.removeCart(id: Long)
+
+GET		/sendmail				controllers.AdminController.sendEmail()
+
+GET		/orderProducts			controllers.RetrieveController.orderProducts()
+
+GET		/getuser				controllers.RetrieveController.getUser()
+
+#GET	/generatePdf			controllers.AdminController.generatePdf()
+
+#=================================================Testing Module==================================================	
+

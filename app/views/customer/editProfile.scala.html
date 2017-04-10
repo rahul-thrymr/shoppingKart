@@ -1,0 +1,35 @@
+@(cust:models.Customer)
+@header("Edit Profile")
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <h2 class="text-center login-title">Edit Profile</h2>
+            <hr />
+            <div class="account-wall">
+                
+               <form action="@routes.CustomerController.updateProfile()" method="POST">
+               
+                <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                <input type="text" class="form-control" value="@cust.customer_name" name="name"  autofocus><br>
+                
+                <label for="usrname"><span class="glyphicon glyphicon-envelope"></span> Email</label>
+                <input type="text" class="form-control" value="@cust.email" name="email"  ><br>
+                
+                <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                <input type="text" class="form-control" value="@cust.password" name="password" ><br>
+                
+                <label for="usrname"><span class="glyphicon glyphicon-align-justify"></span> Address</label>
+                <input type="text" class="form-control" value="@cust.address" name="address" ><br>
+                
+                <label for="psw"><span class="glyphicon glyphicon-phone-alt"></span> Mobile</label>
+                <input type="number" class="form-control" value="@cust.mobile" name="mobile" ><br>       
+	
+                <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="return confirm('Do you want Update your profile ...?');">Update Profile</button>
+              
+               </form>
+            </div>
+        </div>
+    </div>
+</div>
+                    

@@ -1,0 +1,67 @@
+@(list:List[models.CartDetails])(message:String)
+@header("View Cart")
+@import java.lang.Double; var total=0d; 
+
+<center><div id="div2"><h3><font color="green">@flash.get("success")</font></h3></div></center>
+<center><h3><font color="green"><div id="div3"></div></font></h3></center>
+<br>
+<h2 align="center">View Cart List</h2>
+<p align="right"><a href="/cartHistory" class="btn btn-info">Ordered Cart History</a></p>
+<hr>
+<form action="@routes.AdminController.sendEmail()">
+ <div class="container">
+	<div class="row">
+		<div class="col-md-12">
+		@if(message=="notempty"){
+			<table class="table table-striped" style="background-color:silver">
+				<thead>	
+					<tr>	
+						<th>Image </th>				
+						<th>Product name</th>
+						<th>Color </th>
+						<th>Price </th>
+						<th>Warranty </th>
+						<th>Quantity </th>
+						<th>Date of Order</th>
+						<th></th>
+					</tr>							
+				</thead>
+				<tbody>
+				@for(pro <- list){
+
+						<tr id="pro-@pro.id">
+							<td><img  src=@routes.RetrieveController.getImage(pro.products.id) height="100" width="100" align="middle" class="avatar" id="editimageDisplay"></td>
+							<td>@pro.products.brand</td><td>@pro.products.color</td><td>@pro.amount</td><td>@pro.products.waranty</td><td>@pro.quantity</td><td>@pro.createdOn</td>
+							<td><input type="button" class="btn btn-danger removeCart" data-id="@pro.id" value="Remove" /></td>						
+						</tr>
+					
+					@(total=total+pro.amount)
+				}
+				</tbody>
+				
+			</table>
+				<table align="center">
+					<td>Total amount is&nbsp;</td><td>:&nbsp;</td><td>@total</td>
+				</table>
+			<br/>
+			<div align="center">
+				<input type="submit" value="BUY NOW" class="btn btn-success btn-lg" onclick="return confirm('Do you want continue ...?');"/>
+				
+			</div>
+			}else{
+				<center><div><h3><font color="red">You don't have Cart details, please ADD to CART</font></h3></div></center>
+			}
+		</div>
+	</div>
+</div>
+<script>
+	$('.removeCart').click(function(){
+		var proId = $(this).attr('data-id');
+		$.get('/removecart/'+proId, function(data){
+				$('div3').html(data);
+				$('#pro-'+proId).remove();
+
+		});
+	});
+</script>
+</form>

@@ -1,0 +1,43 @@
+@* header Template File *@
+@(message:String)
+@main(message) {
+
+
+@if(AdminController.isAdminLoggedIn()==true){
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="@routes.FirstController.callAdminHomePage()">BADA Shopping</a>
+	    </div>
+	    <ul class="nav navbar-nav">     	
+	      <li class="active"><a href="@routes.FirstController.callCategory()">Add Category</a></li>  
+	      <li class="active"><a href="@routes.FirstController.callProducts()">Add Products</a></li>
+	      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">View Products</a>
+	      	<ul class="dropdown-menu">
+	      			<li><a href="@routes.RetrieveController.allProductDetails()">All Products</a></li>
+	      		@for(cat<-models.Category.find.all()){
+	      			<li><a href="@routes.RetrieveController.viewProductsToAdmin(cat.id)">@cat.categoryName</a></li>
+	      		}
+	      	</ul>
+	      </li>
+	      <li class="active"><a href="@routes.RetrieveController.orderProducts()">Order Products</a></li> 
+	      
+	    </ul>
+	    
+	    
+	    <ul class="nav navbar-nav navbar-right">
+	      <li><a href="@routes.AdminController.logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+	    </ul>
+	    
+	  </div>
+	</nav>
+	<h1><font color="Orange"><p class="text-center">Welcome to BADA Shopping</p></font></h1>
+}else{
+	<h1 align="center"><font color="red">You don't have rights to access this web site</font></h1>
+}
+  
+
+}
+<script type="text/javascript">
+        window.history.forward(-1);
+    </script>

@@ -1,0 +1,57 @@
+@(pro:models.Products)
+@adminHeader("Admin Edit Toys")
+<br>
+<h2 align="center">Updating Products</h2>
+<hr>
+<form action="@routes.AdminController.updateProducts(pro.id)" method="POST" enctype="multipart/form-data">
+ <div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-striped" style="background-color:silver">
+				<thead>	
+					<tr>	
+						<th>Image </th>				
+						<th>Toy name</th>
+						<th>Color </th>
+						<th>Price </th>
+						<th>Waranty </th>
+						<th>Description </th>
+						<th></th>
+					</tr>							
+				</thead>
+				
+				<tbody>
+					<tr>
+						<td>
+							<img  src=@routes.RetrieveController.getImage(pro.id) height="80" width="80" align="middle" class="avatar" id="editimageDisplay">
+							<div class="row">
+            				<div class="col-md-2 text-center">
+		                	<div class="form-group">
+			                	<div class="col-md-2">
+			                		<label for="inputFile" class="control-label btn btn-raised"><b>Upload Image</b></label>
+								</div><br>
+						
+			               		 <div class="col-md-4">
+			                 		 <input type="file" name="image" id="inputFile"  class="upload">
+			                 		 <br>
+			                	</div>
+		             		</div>
+		             		</div>
+		             		</div>
+						</td>
+						<td><input type="text" class="form-control"  name="brand" value="@pro.brand"  autofocus></td>
+						<td><input type="text" class="form-control" value="@pro.color" name="color"></td>
+						<td><input type="number" class="form-control" value="@pro.price" name="price"></td>
+						<td> <input type="text" class="form-control" value="@pro.waranty" name="waranty"></td>
+						<td><input type="text" class="form-control" value="@pro.description" name="description"></td>
+						<td><input type="submit" value="Update" class="btn btn-success" /></td>
+					
+					</tr>
+				</tbody>
+				
+			</table>
+
+		</div>
+	</div>
+</div>
+</form>

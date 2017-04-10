@@ -1,0 +1,75 @@
+@(quantity:String)
+@header("Add To Cart")
+<div class="container">
+<div id="myCarousel" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="@routes.Assets.versioned("images/b.jpg")" class="img-responsive">
+      <div class="container">
+        <div class="carousel-caption">
+          </div>
+      </div>
+    </div>
+ </div>
+</div>
+<center><div><h3><font color="green">@flash.get("success")</font></h3></div></center>
+<div  class="container">
+	
+	<div align="right">
+			<div id="div2" class="btn btn-warning" align="right"><font color="green"><a href=viewCart style="color:green">CART&nbsp;:&nbsp;</b>@quantity</a></font></div>
+	</div>
+	
+<br>
+<h2 align="center">Details of Products</h2>
+<hr>
+@for(p<-models.Products.find.all()){
+<form action="@routes.AdminController.addToCart(p.id)">
+ <div align="center">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="col-md-6"><img  src=@routes.RetrieveController.getImage(p.id) height="300" width="300" align="middle" class="avatar" id="editimageDisplay"></div>
+			<div class="col-md-6">
+				<table width="80%" height="100%">
+						<thead>						
+							<tr><th>Product name</th><td>:&nbsp;</td><td>@p.brand</td></tr> <tr><td><br></td></tr>
+							<tr><th>Color</th><td>:&nbsp;</td><td>@p.color</td></tr> <tr><td><br></td></tr>							
+							<tr><th>Price </th><td>:&nbsp;</td><td>@p.price</td></tr> <tr><td><br></td></tr>
+							<tr><th>Warranty </th><td>:&nbsp;</td><td>@p.waranty</td></tr> <tr><td><br></td></tr>
+							<tr><th>Description </th><td>:&nbsp;</td><td>@p.description</td></tr> <tr><td><br></td></tr>
+							<tr><td><br><br></td></tr>  
+							<tr><td colspan="3" align="center"><input type="submit" class="btn btn-succert"  value="ADD TO CART"/></td></tr>
+						
+						</thead>
+					</table>
+					<hr>
+			</div>
+		</div>
+		
+		
+	</div>
+</div>
+</form>
+}
+</div>
+
+</body>
+ <script	
+ function perform(){
+		var xhttp;
+		if (window.XMLHttpRequest) {
+		    xhttp = new XMLHttpRequest();
+		    } else {
+		    
+		    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xhttp.onreadystatechange=function(){
+			
+				document.getElementById("div1").innerHTML=this.responseText;
+			
+		};
+		xhttp.open("GET","/viewProducts",true)
+		xhttp.send();
+	});
+	
+	
+</script>

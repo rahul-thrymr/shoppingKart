@@ -1,0 +1,120 @@
+@* header Template File *@
+@(message:String)
+
+@main(message) {
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    <img  src="@routes.Assets.versioned("images/shopping.jpg")" height="75" width="75" align="middle" class="avatar" id="editimageDisplay" class="navbar-brand" />
+      <a class="navbar-brand" href="/"><b>BADA Shopping</b></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/viewProducts"><b>Home</b></a></li>
+      <li class="active"><a href="/viewProducts"><b>View Products</b></a></li>
+    </ul>
+      @*<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Page 1-1</a></li>
+          <li><a href="#">Page 1-2</a></li>
+          <li><a href="#">Page 1-3</a></li>
+         </ul>
+      <li><a href="#">Page 2</a></li>    
+     </li>*@
+    
+    
+    
+    <ul class="nav navbar-nav navbar-right">
+    	@if(CustomerController.isLoggedIn()==false){
+	      	<li><a href="@routes.FirstController.callRegister()"><span class="glyphicon glyphicon-user"></span><b>Register</b></a></li>
+	      
+	      	<li><a href="@routes.FirstController.callLogin()"><span class="glyphicon glyphicon-log-in"></span>&nbsp;<b>Login</b></a></li>
+      	}else{
+      		
+			<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;Profile</a>
+				<ul class="dropdown-menu">
+      	 			<li><a type="button" data-toggle="modal" class="getusr"><span class="glyphicon glyphicon-user"></span>&nbsp;View Profile</a></li>
+					<li><a type="button" data-toggle="modal" class="refer"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;Refer a friend</a></li>
+      				<li><a href="@routes.CustomerController.logout()"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a></li>
+				</ul>
+			</li>
+      		
+      	}
+    </ul>
+    
+  </div>
+</nav>
+<h1><font color="Orange"><p class="text-center">Welcome to BADA Shopping</p></font></h1>
+ 
+
+<!-- View Profile Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+          <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">&times;</button>
+             <h4 class="modal-title">User Details</h4>
+          </div>
+          <div class="modal-body">
+             <img src="@routes.Assets.versioned("images/rajesh.jpg")" height="150" width="150" alt="Avatar" /> 
+             <hr>
+             <h5>Name:&nbsp;&nbsp;<span id="name"></span></h5>
+             <h5>Contact:&nbsp;&nbsp;<span id="contact"></span></h5>
+             <h5>Email Id:&nbsp;&nbsp;<span id="email"></span></h5>
+             <h5 align="center"><a href="@routes.FirstController.editProfile()" class="btn btn-primary">Edit Profile</a></h5>
+             
+          </div>
+    </div>
+  </div>
+</div>
+ 
+ 
+ <!-- Refer a friend Modal -->
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+          <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">&times;</button>
+             <h4 class="modal-title">Refer a friend</h4>
+          </div>
+          <div class="modal-body">
+          	<form action="/refer">
+	            <h5 align="center"><b>Email Id:</b><input type="text" name="email" class="form-control" placeholder="Enter an email"/></h5>
+	            <h5 align="center"><input type="submit" id="refer" class="btn btn-primary" vlaue="Submit"/></h5>
+	         </form> 
+          </div>
+    </div>
+  </div>
+</div>
+
+}
+
+@*var url = window.location.href;
+window.history.go(-window.history.length);
+window.location.href = url;
+*@
+
+
+<script type="text/javascript">	
+$(".getusr").click( function() {
+	$.get('/getuser',function(data){
+		var jsonObject = $.parseJSON(data);
+		$(".modal-body #name").html(jsonObject.customer_name);
+		$(".modal-body #contact").html(jsonObject.mobile);
+		$(".modal-body #email").html(jsonObject.email);
+		$('#myModal').modal('show');
+		});
+	}); 
+
+
+$(".refer").click( function() {
+	
+		$('#myModal2').modal('show');
+		
+	}); 
+
+</script>
+
+	

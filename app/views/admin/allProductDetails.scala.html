@@ -1,0 +1,38 @@
+@(list:List[models.Products])
+@adminHeader("Admin View Toys")
+<br>
+<h2 align="center">Products List</h2>
+<hr>
+<form action=#">
+ <div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-striped" style="background-color:silver">
+				<thead>	
+					<tr>	
+						<th>Image </th>				
+						<th>Product name</th>
+						<th>Color </th>
+						<th>Price </th>
+						<th>Warranty </th>
+						<th>Description </th>
+						<th></th>
+						<th></th>
+					</tr>							
+				</thead>
+					<tbody>
+						@for(pro <- list){
+							<tr>
+								<td><img  src=@routes.RetrieveController.getImage(pro.id) height="100" width="100" align="middle" class="avatar" id="editimageDisplay"></td>
+								<td>@pro.brand</td><td>@pro.color</td><td>@pro.price</td><td>@pro.waranty</td><td>@pro.description</td>
+								<td><a href="@routes.RetrieveController.getProductId(pro.id)" class="btn btn-primary">Edit</a></td>
+								<td><a href="/deleteProducts/@pro.id" class="btn btn-danger" onclick="return confirm('Do you want to remove the product ...?');">Delete</a></td>									
+							</tr>
+						}
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+</div>
+</form>
